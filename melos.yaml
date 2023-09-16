@@ -1,0 +1,38 @@
+name: ditonton
+
+packages:
+  - packages/features/about/
+  - packages/features/movie/
+  - packages/features/search/
+  - packages/features/tv/
+  - packages/features/watchlist/
+  - packages/shared_libraries/core/
+  - packages/shared_libraries/share_dependencies/
+  - '*'
+
+scripts:
+  analyze:
+    run: melos exec -- flutter analyze .
+    description: Run `flutter analyze` in all packages.
+  test:flutter:
+    run: melos exec --dir-exists="test" --fail-fast -- flutter test --no-pub
+    description: Run Flutter tests for a specific package in this project.
+    packageFilters:
+      flutter: true
+      dirExists: test
+  test:all:
+    run: melos run test:flutter --no-select
+    description: Run all Dart & Flutter tests in this project.
+
+  # Generate Resources
+  generate:resources:
+    run: melos exec -c 1 --depends-on="build_runner" --depends-on="flutter_gen_runner" -- "fluttergen -c pubspec.yaml"
+    packageFilters:
+      dependsOn: flutter_gen_runner
+
+  generate:flutter:
+    run: melos exec -c 1 --depends-on="build_runner" --flutter -- "flutter pub run build_runner build --delete-conflicting-outputs && exit 0"
+    description: Build all generated files for a specific package in this project.
+    packageFilters:
+      flutter: true
+      dependsOn: build_runner

@@ -28,21 +28,43 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  http: ^1.1.0
-  provider: ^6.0.5
-  dartz: ^0.10.1
-  equatable: ^2.0.5
-  google_fonts: ^5.1.0
-  flutter_rating_bar: ^4.0.1
-  cached_network_image: ^3.2.3
+  # http: ^1.1.0
+  # provider: ^6.0.5
+  # dartz: ^0.10.1
+  # equatable: ^2.0.5
+  # google_fonts: ^5.1.0
+  # flutter_rating_bar: ^4.0.1
+  # cached_network_image: ^3.2.3
   get_it: ^7.6.4
-  sqflite: ^2.3.0
+  # sqflite: ^2.3.0
+  melos: ^3.1.1
 
 dev_dependencies:
-  mockito: ^5.4.2
+  # mockito: ^5.4.2
   build_runner: ^2.4.6
   flutter_test:
     sdk: flutter
+  
+  core:
+    path: packages/shared_libraries/core/
+
+  shared_dependencies:
+    path: packages/shared_libraries/shared_dependencies/
+
+  about:
+    path: packages/features/about/
+
+  movie:
+    path: packages/features/movie/
+
+  search:
+    path: packages/features/search/
+
+  tv:
+    path: packages/features/tv/
+
+  watchlist:
+    path: packages/features/watchlist/
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

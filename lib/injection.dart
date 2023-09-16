@@ -1,43 +1,10 @@
+import 'package:core/core.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
-
-import 'data/datasources/db/database_helper.dart';
-import 'data/datasources/local_data_source.dart';
-import 'data/datasources/remote_data_source.dart';
-import 'data/repositories/repository_impl.dart';
-import 'domain/repositories/repository.dart';
-import 'domain/usecases/get_movie_detail.dart';
-import 'domain/usecases/get_movie_recommendations.dart';
-import 'domain/usecases/get_now_playing_movies.dart';
-import 'domain/usecases/get_now_playing_tv_series.dart';
-import 'domain/usecases/get_popular_movies.dart';
-import 'domain/usecases/get_popular_tv_series.dart';
-import 'domain/usecases/get_top_rated_movies.dart';
-import 'domain/usecases/get_top_rated_tv_series.dart';
-import 'domain/usecases/get_tv_series_detail.dart';
-import 'domain/usecases/get_tv_series_recommendations.dart';
-import 'domain/usecases/get_tv_series_season_detail.dart';
-import 'domain/usecases/get_watchlist_movies.dart';
-import 'domain/usecases/get_watchlist_status_movies.dart';
-import 'domain/usecases/get_watchlist_status_tv_series.dart';
-import 'domain/usecases/get_watchlist_tv_series.dart';
-import 'domain/usecases/remove_watchlist_movies.dart';
-import 'domain/usecases/remove_watchlist_tv_series.dart';
-import 'domain/usecases/save_watchlist_movies.dart';
-import 'domain/usecases/save_watchlist_tv_series.dart';
-import 'domain/usecases/search_movies.dart';
-import 'domain/usecases/search_tv_series.dart';
-import 'presentation/provider/episode_tv_series_notifiier.dart';
-import 'presentation/provider/movie_detail_notifier.dart';
-import 'presentation/provider/movie_list_notifier.dart';
-import 'presentation/provider/movie_search_notifier.dart';
-import 'presentation/provider/popular_movies_notifier.dart';
-import 'presentation/provider/popular_tv_series_notifier.dart';
-import 'presentation/provider/top_rated_movies_notifier.dart';
-import 'presentation/provider/top_rated_tv_series_notifier.dart';
-import 'presentation/provider/tv_series_detail_notifier.dart';
-import 'presentation/provider/tv_series_list_notifier.dart';
-import 'presentation/provider/watchlist_movie_notifier.dart';
+import 'package:movie/movie.dart';
+import 'package:search/search.dart';
+import 'package:shared_dependencies/http/http.dart' as http;
+import 'package:tv/tv.dart';
+import 'package:watchlist/watchlist.dart';
 
 final locator = GetIt.instance;
 
@@ -60,7 +27,7 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieSearchNotifier(
+    () => SearchNotifier(
       searchMovies: locator(),
       searchTvSeries: locator(),
     ),
@@ -76,7 +43,7 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => WatchlistMovieNotifier(
+    () => WatchlistNotifier(
       getWatchlistMovies: locator(),
       getWatchlistTvSeries: locator(),
     ),
@@ -138,18 +105,50 @@ void init() {
   locator.registerLazySingleton(() => SearchTvSeries(locator()));
 
   // repository
-  locator.registerLazySingleton<Repository>(
-    () => RepositoryImpl(
+  locator.registerLazySingleton<MovieRepository>(
+    () => MovieRepositoryImpl(
       remoteDataSource: locator(),
       localDataSource: locator(),
     ),
   );
 
+  locator.registerLazySingleton<SearchRepository>(
+    () => SearchRepositoryImpl(
+      remoteDataSource: locator(),
+    ),
+  );
+
+  locator.registerLazySingleton<TvRepository>(
+    () => TvRepositoryImpl(
+      remoteDataSource: locator(),
+      localDataSource: locator(),
+    ),
+  );
+
+  locator.registerLazySingleton<WatchlistRepository>(
+    () => WatchlistRepositoryImpl(
+      localDataSource: locator(),
+    ),
+  );
+
   // data sources
-  locator.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(client: locator()));
-  locator.registerLazySingleton<LocalDataSource>(
-      () => LocalDataSourceImpl(databaseHelper: locator()));
+  locator.registerLazySingleton<MovieRemoteDataSource>(
+      () => MovieRemoteDataSourceImpl(client: locator()));
+
+  locator.registerLazySingleton<MovieLocalDataSource>(
+      () => MovieLocalDataSourceImpl(databaseHelper: locator()));
+
+  locator.registerLazySingleton<TvRemoteDataSource>(
+      () => TvRemoteDataSourceImpl(client: locator()));
+
+  locator.registerLazySingleton<TvLocalDataSource>(
+      () => TvLocalDataSourceImpl(databaseHelper: locator()));
+
+  locator.registerLazySingleton<SearchRemoteDataSource>(
+      () => SearchRemoteDataSourceImpl(client: locator()));
+
+  locator.registerLazySingleton<WatchlistLocalDataSource>(
+      () => WatchlistLocalDataSourceImpl(databaseHelper: locator()));
 
   // helper
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
