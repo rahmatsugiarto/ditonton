@@ -21,13 +21,13 @@ import 'presentation/pages/watchlist_page.dart';
 import 'presentation/provider/episode_tv_series_notifiier.dart';
 import 'presentation/provider/movie_detail_notifier.dart';
 import 'presentation/provider/movie_list_notifier.dart';
-import 'presentation/provider/movie_search_notifier.dart';
+import 'presentation/provider/search_notifier.dart';
 import 'presentation/provider/popular_movies_notifier.dart';
 import 'presentation/provider/popular_tv_series_notifier.dart';
 import 'presentation/provider/top_rated_movies_notifier.dart';
 import 'presentation/provider/top_rated_tv_series_notifier.dart';
 import 'presentation/provider/tv_series_list_notifier.dart';
-import 'presentation/provider/watchlist_movie_notifier.dart';
+import 'presentation/provider/watchlist_notifier.dart';
 
 void main() {
   di.init();
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<MovieDetailNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
+          create: (_) => di.locator<SearchNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedMoviesNotifier>(),
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<PopularMoviesNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
+          create: (_) => di.locator<WatchlistNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesListNotifier>(),

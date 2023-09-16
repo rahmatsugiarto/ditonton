@@ -6,11 +6,11 @@ import '../../domain/entities/tv_series.dart';
 import '../../domain/usecases/get_watchlist_movies.dart';
 import '../../domain/usecases/get_watchlist_tv_series.dart';
 
-class WatchlistMovieNotifier extends ChangeNotifier {
+class WatchlistNotifier extends ChangeNotifier {
   final GetWatchlistMovies getWatchlistMovies;
   final GetWatchlistTvSeries getWatchlistTvSeries;
 
-  WatchlistMovieNotifier({
+  WatchlistNotifier({
     required this.getWatchlistMovies,
     required this.getWatchlistTvSeries,
   });

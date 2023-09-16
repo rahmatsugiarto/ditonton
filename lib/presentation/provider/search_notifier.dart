@@ -6,11 +6,11 @@ import '../../domain/entities/movie.dart';
 import '../../domain/usecases/search_movies.dart';
 import '../../domain/usecases/search_tv_series.dart';
 
-class MovieSearchNotifier extends ChangeNotifier {
+class SearchNotifier extends ChangeNotifier {
   final SearchMovies searchMovies;
   final SearchTvSeries searchTvSeries;
 
-  MovieSearchNotifier({
+  SearchNotifier({
     required this.searchMovies,
     required this.searchTvSeries,
   });

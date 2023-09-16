@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../common/constants.dart';
 import '../../common/enum.dart';
-import '../provider/movie_search_notifier.dart';
+import '../provider/search_notifier.dart';
 import '../widgets/movie_card_list.dart';
 
 class SearchPage extends StatefulWidget {
@@ -34,7 +34,7 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Consumer<MovieSearchNotifier>(builder: (context, data, child) {
+            Consumer<SearchNotifier>(builder: (context, data, child) {
               return TextField(
                 controller: controllerSearch,
                 onSubmitted: (query) {
@@ -53,7 +53,7 @@ class _SearchPageState extends State<SearchPage> {
               );
             }),
             SizedBox(height: 16),
-            Consumer<MovieSearchNotifier>(
+            Consumer<SearchNotifier>(
               builder: (context, data, child) {
                 return Row(
                   children: [
@@ -86,7 +86,7 @@ class _SearchPageState extends State<SearchPage> {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<MovieSearchNotifier>(
+            Consumer<SearchNotifier>(
               builder: (context, data, child) {
                 if (data.searchMovieState == RequestState.Loading) {
                   return Center(

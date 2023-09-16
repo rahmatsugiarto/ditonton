@@ -30,14 +30,14 @@ import 'domain/usecases/search_tv_series.dart';
 import 'presentation/provider/episode_tv_series_notifiier.dart';
 import 'presentation/provider/movie_detail_notifier.dart';
 import 'presentation/provider/movie_list_notifier.dart';
-import 'presentation/provider/movie_search_notifier.dart';
+import 'presentation/provider/search_notifier.dart';
 import 'presentation/provider/popular_movies_notifier.dart';
 import 'presentation/provider/popular_tv_series_notifier.dart';
 import 'presentation/provider/top_rated_movies_notifier.dart';
 import 'presentation/provider/top_rated_tv_series_notifier.dart';
 import 'presentation/provider/tv_series_detail_notifier.dart';
 import 'presentation/provider/tv_series_list_notifier.dart';
-import 'presentation/provider/watchlist_movie_notifier.dart';
+import 'presentation/provider/watchlist_notifier.dart';
 
 final locator = GetIt.instance;
 
@@ -60,7 +60,7 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieSearchNotifier(
+    () => SearchNotifier(
       searchMovies: locator(),
       searchTvSeries: locator(),
     ),
@@ -76,7 +76,7 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => WatchlistMovieNotifier(
+    () => WatchlistNotifier(
       getWatchlistMovies: locator(),
       getWatchlistTvSeries: locator(),
     ),
