@@ -11,15 +11,12 @@ import 'package:tv/data/datasources/tv_remote_data_source.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
-  const BASE_URL = 'https://api.themoviedb.org/3';
-
   late TvRemoteDataSourceImpl dataSource;
-  late MockHttpClient mockHttpClient;
+  late MockSSLPinningClient mockSSLPinningClient;
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
-    dataSource = TvRemoteDataSourceImpl(client: mockHttpClient);
+    mockSSLPinningClient = MockSSLPinningClient();
+    dataSource = TvRemoteDataSourceImpl(client: mockSSLPinningClient);
   });
 
   group('get Now Playing Tv Series', () {
@@ -30,7 +27,8 @@ void main() {
     test('should return list of TvSeries Model when the response code is 200',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
+      when(mockSSLPinningClient
+              .get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/tv_series_now_playing.json'), 200));
       // act
@@ -43,7 +41,8 @@ void main() {
         'should throw a ServerException when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
+      when(mockSSLPinningClient
+              .get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getNowPlayingTvSeries();
@@ -60,7 +59,7 @@ void main() {
     test('should return list of TvSeries Model when the response code is 200',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+      when(mockSSLPinningClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/tv_series_popular.json'), 200));
       // act
@@ -73,7 +72,7 @@ void main() {
         'should throw a ServerException when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+      when(mockSSLPinningClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getPopularTvSeries();
@@ -90,7 +89,8 @@ void main() {
     test('should return list of TvSeries Model when the response code is 200',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
+      when(mockSSLPinningClient
+              .get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/tv_series_top_rated.json'), 200));
       // act
@@ -103,7 +103,8 @@ void main() {
         'should throw a ServerException when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
+      when(mockSSLPinningClient
+              .get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getTopRatedTvSeries();
@@ -120,7 +121,7 @@ void main() {
     test('should return tv series detail when the response code is 200',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
+      when(mockSSLPinningClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
           .thenAnswer((_) async {
         return http.Response(
           readJson('dummy_data/tv_series_detail.json'),
@@ -140,7 +141,7 @@ void main() {
     test('should throw Server Exception when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
+      when(mockSSLPinningClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getTvSeriesDetail(tId);
@@ -158,7 +159,7 @@ void main() {
     test('should return list of Tv Series Model when the response code is 200',
         () async {
       // arrange
-      when(mockHttpClient
+      when(mockSSLPinningClient
               .get(Uri.parse('$BASE_URL/tv/$tId/recommendations?$API_KEY')))
           .thenAnswer((_) async => http.Response(
                 readJson('dummy_data/tv_series_recommendations.json'),
@@ -177,7 +178,7 @@ void main() {
     test('should throw Server Exception when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient
+      when(mockSSLPinningClient
               .get(Uri.parse('$BASE_URL/tv/$tId/recommendations?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
@@ -196,7 +197,7 @@ void main() {
     test('should return tv series season detail when the response code is 200',
         () async {
       // arrange
-      when(mockHttpClient
+      when(mockSSLPinningClient
               .get(Uri.parse('$BASE_URL/tv/$tId/season/$tSeason?$API_KEY')))
           .thenAnswer((_) async {
         return http.Response(
@@ -217,7 +218,7 @@ void main() {
     test('should throw Server Exception when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient
+      when(mockSSLPinningClient
               .get(Uri.parse('$BASE_URL/tv/$tId/season/$tSeason?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act

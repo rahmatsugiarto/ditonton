@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:shared_dependencies/shared_dependencies.dart';
 
-import '../../data/models/movie_table.dart';
-import '../../data/models/tv_series_table.dart';
+import '../data/models/movie_table.dart';
+import '../data/models/tv_series_table.dart';
 
 
 

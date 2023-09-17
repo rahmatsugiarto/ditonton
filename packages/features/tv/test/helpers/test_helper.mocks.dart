@@ -3,16 +3,17 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
-import 'dart:convert' as _i8;
-import 'dart:typed_data' as _i9;
+import 'dart:async' as _i6;
+import 'dart:convert' as _i9;
+import 'dart:typed_data' as _i10;
 
 import 'package:core/core.dart' as _i3;
+import 'package:http/io_client.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:shared_dependencies/shared_dependencies.dart' as _i2;
-import 'package:tv/data/datasources/tv_local_data_source.dart' as _i7;
-import 'package:tv/data/datasources/tv_remote_data_source.dart' as _i6;
-import 'package:tv/domain/repositories/tv_repository.dart' as _i4;
+import 'package:tv/data/datasources/tv_local_data_source.dart' as _i8;
+import 'package:tv/data/datasources/tv_remote_data_source.dart' as _i7;
+import 'package:tv/domain/repositories/tv_repository.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -67,9 +68,9 @@ class _FakeResponse_3 extends _i1.SmartFake implements _i2.Response {
         );
 }
 
-class _FakeStreamedResponse_4 extends _i1.SmartFake
-    implements _i2.StreamedResponse {
-  _FakeStreamedResponse_4(
+class _FakeIOStreamedResponse_4 extends _i1.SmartFake
+    implements _i4.IOStreamedResponse {
+  _FakeIOStreamedResponse_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -81,20 +82,20 @@ class _FakeStreamedResponse_4 extends _i1.SmartFake
 /// A class which mocks [TvRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
+class MockTvRepository extends _i1.Mock implements _i5.TvRepository {
   MockTvRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>
+  _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>
       getNowPlayingTvSeries() => (super.noSuchMethod(
             Invocation.method(
               #getNowPlayingTvSeries,
               [],
             ),
             returnValue:
-                _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>.value(
+                _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>.value(
                     _FakeEither_0<_i3.Failure, List<_i3.TvSeries>>(
               this,
               Invocation.method(
@@ -102,16 +103,16 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
                 [],
               ),
             )),
-          ) as _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>);
+          ) as _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>);
   @override
-  _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>
+  _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>
       getPopularTvSeries() => (super.noSuchMethod(
             Invocation.method(
               #getPopularTvSeries,
               [],
             ),
             returnValue:
-                _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>.value(
+                _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>.value(
                     _FakeEither_0<_i3.Failure, List<_i3.TvSeries>>(
               this,
               Invocation.method(
@@ -119,16 +120,16 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
                 [],
               ),
             )),
-          ) as _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>);
+          ) as _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>);
   @override
-  _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>
+  _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>
       getTopRatedTvSeries() => (super.noSuchMethod(
             Invocation.method(
               #getTopRatedTvSeries,
               [],
             ),
             returnValue:
-                _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>.value(
+                _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>.value(
                     _FakeEither_0<_i3.Failure, List<_i3.TvSeries>>(
               this,
               Invocation.method(
@@ -136,9 +137,9 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
                 [],
               ),
             )),
-          ) as _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>);
+          ) as _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>);
   @override
-  _i5.Future<_i2.Either<_i3.Failure, _i3.TvSeriesDetail>> getTvSeriesDetail(
+  _i6.Future<_i2.Either<_i3.Failure, _i3.TvSeriesDetail>> getTvSeriesDetail(
           int? id) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -146,7 +147,7 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
           [id],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i3.Failure, _i3.TvSeriesDetail>>.value(
+            _i6.Future<_i2.Either<_i3.Failure, _i3.TvSeriesDetail>>.value(
                 _FakeEither_0<_i3.Failure, _i3.TvSeriesDetail>(
           this,
           Invocation.method(
@@ -154,16 +155,16 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
             [id],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i3.Failure, _i3.TvSeriesDetail>>);
+      ) as _i6.Future<_i2.Either<_i3.Failure, _i3.TvSeriesDetail>>);
   @override
-  _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>
+  _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>
       getTvSeriesRecommendations(int? id) => (super.noSuchMethod(
             Invocation.method(
               #getTvSeriesRecommendations,
               [id],
             ),
             returnValue:
-                _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>.value(
+                _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>.value(
                     _FakeEither_0<_i3.Failure, List<_i3.TvSeries>>(
               this,
               Invocation.method(
@@ -171,16 +172,16 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
                 [id],
               ),
             )),
-          ) as _i5.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>);
+          ) as _i6.Future<_i2.Either<_i3.Failure, List<_i3.TvSeries>>>);
   @override
-  _i5.Future<_i2.Either<_i3.Failure, String>> saveWatchlistTvSeries(
+  _i6.Future<_i2.Either<_i3.Failure, String>> saveWatchlistTvSeries(
           _i3.TvSeriesDetail? tvSeries) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveWatchlistTvSeries,
           [tvSeries],
         ),
-        returnValue: _i5.Future<_i2.Either<_i3.Failure, String>>.value(
+        returnValue: _i6.Future<_i2.Either<_i3.Failure, String>>.value(
             _FakeEither_0<_i3.Failure, String>(
           this,
           Invocation.method(
@@ -188,16 +189,16 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
             [tvSeries],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i3.Failure, String>>);
+      ) as _i6.Future<_i2.Either<_i3.Failure, String>>);
   @override
-  _i5.Future<_i2.Either<_i3.Failure, String>> removeWatchlistTvSeries(
+  _i6.Future<_i2.Either<_i3.Failure, String>> removeWatchlistTvSeries(
           _i3.TvSeriesDetail? tvSeries) =>
       (super.noSuchMethod(
         Invocation.method(
           #removeWatchlistTvSeries,
           [tvSeries],
         ),
-        returnValue: _i5.Future<_i2.Either<_i3.Failure, String>>.value(
+        returnValue: _i6.Future<_i2.Either<_i3.Failure, String>>.value(
             _FakeEither_0<_i3.Failure, String>(
           this,
           Invocation.method(
@@ -205,17 +206,17 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
             [tvSeries],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i3.Failure, String>>);
+      ) as _i6.Future<_i2.Either<_i3.Failure, String>>);
   @override
-  _i5.Future<bool> isAddedToWatchlistTvSeries(int? id) => (super.noSuchMethod(
+  _i6.Future<bool> isAddedToWatchlistTvSeries(int? id) => (super.noSuchMethod(
         Invocation.method(
           #isAddedToWatchlistTvSeries,
           [id],
         ),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
   @override
-  _i5.Future<
+  _i6.Future<
       _i2
       .Either<_i3.Failure, _i3.TvSeriesSeasonDetail>> getTvSeriesSeasonDetail(
     int? id,
@@ -230,7 +231,7 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
           ],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i3.Failure, _i3.TvSeriesSeasonDetail>>.value(
+            _i6.Future<_i2.Either<_i3.Failure, _i3.TvSeriesSeasonDetail>>.value(
                 _FakeEither_0<_i3.Failure, _i3.TvSeriesSeasonDetail>(
           this,
           Invocation.method(
@@ -241,56 +242,56 @@ class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
             ],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i3.Failure, _i3.TvSeriesSeasonDetail>>);
+      ) as _i6.Future<_i2.Either<_i3.Failure, _i3.TvSeriesSeasonDetail>>);
 }
 
 /// A class which mocks [TvRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTvRemoteDataSource extends _i1.Mock
-    implements _i6.TvRemoteDataSource {
+    implements _i7.TvRemoteDataSource {
   MockTvRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<List<_i3.TvSeriesModel>> getNowPlayingTvSeries() =>
+  _i6.Future<List<_i3.TvSeriesModel>> getNowPlayingTvSeries() =>
       (super.noSuchMethod(
         Invocation.method(
           #getNowPlayingTvSeries,
           [],
         ),
         returnValue:
-            _i5.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
-      ) as _i5.Future<List<_i3.TvSeriesModel>>);
+            _i6.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
+      ) as _i6.Future<List<_i3.TvSeriesModel>>);
   @override
-  _i5.Future<List<_i3.TvSeriesModel>> getPopularTvSeries() =>
+  _i6.Future<List<_i3.TvSeriesModel>> getPopularTvSeries() =>
       (super.noSuchMethod(
         Invocation.method(
           #getPopularTvSeries,
           [],
         ),
         returnValue:
-            _i5.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
-      ) as _i5.Future<List<_i3.TvSeriesModel>>);
+            _i6.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
+      ) as _i6.Future<List<_i3.TvSeriesModel>>);
   @override
-  _i5.Future<List<_i3.TvSeriesModel>> getTopRatedTvSeries() =>
+  _i6.Future<List<_i3.TvSeriesModel>> getTopRatedTvSeries() =>
       (super.noSuchMethod(
         Invocation.method(
           #getTopRatedTvSeries,
           [],
         ),
         returnValue:
-            _i5.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
-      ) as _i5.Future<List<_i3.TvSeriesModel>>);
+            _i6.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
+      ) as _i6.Future<List<_i3.TvSeriesModel>>);
   @override
-  _i5.Future<_i3.TvSeriesDetailResponse> getTvSeriesDetail(int? id) =>
+  _i6.Future<_i3.TvSeriesDetailResponse> getTvSeriesDetail(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTvSeriesDetail,
           [id],
         ),
-        returnValue: _i5.Future<_i3.TvSeriesDetailResponse>.value(
+        returnValue: _i6.Future<_i3.TvSeriesDetailResponse>.value(
             _FakeTvSeriesDetailResponse_1(
           this,
           Invocation.method(
@@ -298,19 +299,19 @@ class MockTvRemoteDataSource extends _i1.Mock
             [id],
           ),
         )),
-      ) as _i5.Future<_i3.TvSeriesDetailResponse>);
+      ) as _i6.Future<_i3.TvSeriesDetailResponse>);
   @override
-  _i5.Future<List<_i3.TvSeriesModel>> getTvSeriesRecommendations(int? id) =>
+  _i6.Future<List<_i3.TvSeriesModel>> getTvSeriesRecommendations(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTvSeriesRecommendations,
           [id],
         ),
         returnValue:
-            _i5.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
-      ) as _i5.Future<List<_i3.TvSeriesModel>>);
+            _i6.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
+      ) as _i6.Future<List<_i3.TvSeriesModel>>);
   @override
-  _i5.Future<_i3.TvSeriesSeasonDetailResponse> getTvSeriesSeasonDetail(
+  _i6.Future<_i3.TvSeriesSeasonDetailResponse> getTvSeriesSeasonDetail(
     int? id,
     int? season,
   ) =>
@@ -322,7 +323,7 @@ class MockTvRemoteDataSource extends _i1.Mock
             season,
           ],
         ),
-        returnValue: _i5.Future<_i3.TvSeriesSeasonDetailResponse>.value(
+        returnValue: _i6.Future<_i3.TvSeriesSeasonDetailResponse>.value(
             _FakeTvSeriesSeasonDetailResponse_2(
           this,
           Invocation.method(
@@ -333,54 +334,54 @@ class MockTvRemoteDataSource extends _i1.Mock
             ],
           ),
         )),
-      ) as _i5.Future<_i3.TvSeriesSeasonDetailResponse>);
+      ) as _i6.Future<_i3.TvSeriesSeasonDetailResponse>);
   @override
-  _i5.Future<List<_i3.TvSeriesModel>> searchTvSeries(String? query) =>
+  _i6.Future<List<_i3.TvSeriesModel>> searchTvSeries(String? query) =>
       (super.noSuchMethod(
         Invocation.method(
           #searchTvSeries,
           [query],
         ),
         returnValue:
-            _i5.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
-      ) as _i5.Future<List<_i3.TvSeriesModel>>);
+            _i6.Future<List<_i3.TvSeriesModel>>.value(<_i3.TvSeriesModel>[]),
+      ) as _i6.Future<List<_i3.TvSeriesModel>>);
 }
 
 /// A class which mocks [TvLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvLocalDataSource extends _i1.Mock implements _i7.TvLocalDataSource {
+class MockTvLocalDataSource extends _i1.Mock implements _i8.TvLocalDataSource {
   MockTvLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<String> insertWatchlistTvSeries(_i3.TvSeriesTable? tvSeries) =>
+  _i6.Future<String> insertWatchlistTvSeries(_i3.TvSeriesTable? tvSeries) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertWatchlistTvSeries,
           [tvSeries],
         ),
-        returnValue: _i5.Future<String>.value(''),
-      ) as _i5.Future<String>);
+        returnValue: _i6.Future<String>.value(''),
+      ) as _i6.Future<String>);
   @override
-  _i5.Future<String> removeWatchlistTvSeries(_i3.TvSeriesTable? tvSeries) =>
+  _i6.Future<String> removeWatchlistTvSeries(_i3.TvSeriesTable? tvSeries) =>
       (super.noSuchMethod(
         Invocation.method(
           #removeWatchlistTvSeries,
           [tvSeries],
         ),
-        returnValue: _i5.Future<String>.value(''),
-      ) as _i5.Future<String>);
+        returnValue: _i6.Future<String>.value(''),
+      ) as _i6.Future<String>);
   @override
-  _i5.Future<_i3.TvSeriesTable?> getTvSeriesById(int? id) =>
+  _i6.Future<_i3.TvSeriesTable?> getTvSeriesById(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTvSeriesById,
           [id],
         ),
-        returnValue: _i5.Future<_i3.TvSeriesTable?>.value(),
-      ) as _i5.Future<_i3.TvSeriesTable?>);
+        returnValue: _i6.Future<_i3.TvSeriesTable?>.value(),
+      ) as _i6.Future<_i3.TvSeriesTable?>);
 }
 
 /// A class which mocks [DatabaseHelper].
@@ -392,116 +393,96 @@ class MockDatabaseHelper extends _i1.Mock implements _i3.DatabaseHelper {
   }
 
   @override
-  _i5.Future<_i2.Database?> get database => (super.noSuchMethod(
+  _i6.Future<_i2.Database?> get database => (super.noSuchMethod(
         Invocation.getter(#database),
-        returnValue: _i5.Future<_i2.Database?>.value(),
-      ) as _i5.Future<_i2.Database?>);
+        returnValue: _i6.Future<_i2.Database?>.value(),
+      ) as _i6.Future<_i2.Database?>);
   @override
-  _i5.Future<int> insertWatchlistMovies(_i3.MovieTable? movie) =>
+  _i6.Future<int> insertWatchlistMovies(_i3.MovieTable? movie) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertWatchlistMovies,
           [movie],
         ),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+        returnValue: _i6.Future<int>.value(0),
+      ) as _i6.Future<int>);
   @override
-  _i5.Future<int> removeWatchlistMovies(_i3.MovieTable? movie) =>
+  _i6.Future<int> removeWatchlistMovies(_i3.MovieTable? movie) =>
       (super.noSuchMethod(
         Invocation.method(
           #removeWatchlistMovies,
           [movie],
         ),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+        returnValue: _i6.Future<int>.value(0),
+      ) as _i6.Future<int>);
   @override
-  _i5.Future<Map<String, dynamic>?> getMovieById(int? id) =>
+  _i6.Future<Map<String, dynamic>?> getMovieById(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getMovieById,
           [id],
         ),
-        returnValue: _i5.Future<Map<String, dynamic>?>.value(),
-      ) as _i5.Future<Map<String, dynamic>?>);
+        returnValue: _i6.Future<Map<String, dynamic>?>.value(),
+      ) as _i6.Future<Map<String, dynamic>?>);
   @override
-  _i5.Future<List<Map<String, dynamic>>> getWatchlistMovies() =>
+  _i6.Future<List<Map<String, dynamic>>> getWatchlistMovies() =>
       (super.noSuchMethod(
         Invocation.method(
           #getWatchlistMovies,
           [],
         ),
-        returnValue: _i5.Future<List<Map<String, dynamic>>>.value(
+        returnValue: _i6.Future<List<Map<String, dynamic>>>.value(
             <Map<String, dynamic>>[]),
-      ) as _i5.Future<List<Map<String, dynamic>>>);
+      ) as _i6.Future<List<Map<String, dynamic>>>);
   @override
-  _i5.Future<int> insertWatchlistTvSeries(_i3.TvSeriesTable? tvSeries) =>
+  _i6.Future<int> insertWatchlistTvSeries(_i3.TvSeriesTable? tvSeries) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertWatchlistTvSeries,
           [tvSeries],
         ),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+        returnValue: _i6.Future<int>.value(0),
+      ) as _i6.Future<int>);
   @override
-  _i5.Future<int> removeWatchlistTvSeries(_i3.TvSeriesTable? tvSeries) =>
+  _i6.Future<int> removeWatchlistTvSeries(_i3.TvSeriesTable? tvSeries) =>
       (super.noSuchMethod(
         Invocation.method(
           #removeWatchlistTvSeries,
           [tvSeries],
         ),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+        returnValue: _i6.Future<int>.value(0),
+      ) as _i6.Future<int>);
   @override
-  _i5.Future<Map<String, dynamic>?> getTvSeriesById(int? id) =>
+  _i6.Future<Map<String, dynamic>?> getTvSeriesById(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getTvSeriesById,
           [id],
         ),
-        returnValue: _i5.Future<Map<String, dynamic>?>.value(),
-      ) as _i5.Future<Map<String, dynamic>?>);
+        returnValue: _i6.Future<Map<String, dynamic>?>.value(),
+      ) as _i6.Future<Map<String, dynamic>?>);
   @override
-  _i5.Future<List<Map<String, dynamic>>> getWatchlistTvSeries() =>
+  _i6.Future<List<Map<String, dynamic>>> getWatchlistTvSeries() =>
       (super.noSuchMethod(
         Invocation.method(
           #getWatchlistTvSeries,
           [],
         ),
-        returnValue: _i5.Future<List<Map<String, dynamic>>>.value(
+        returnValue: _i6.Future<List<Map<String, dynamic>>>.value(
             <Map<String, dynamic>>[]),
-      ) as _i5.Future<List<Map<String, dynamic>>>);
+      ) as _i6.Future<List<Map<String, dynamic>>>);
 }
 
-/// A class which mocks [Client].
+/// A class which mocks [SSLPinningClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpClient extends _i1.Mock implements _i2.Client {
-  MockHttpClient() {
+class MockSSLPinningClient extends _i1.Mock implements _i3.SSLPinningClient {
+  MockSSLPinningClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.Response> head(
-    Uri? url, {
-    Map<String, String>? headers,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #head,
-          [url],
-          {#headers: headers},
-        ),
-        returnValue: _i5.Future<_i2.Response>.value(_FakeResponse_3(
-          this,
-          Invocation.method(
-            #head,
-            [url],
-            {#headers: headers},
-          ),
-        )),
-      ) as _i5.Future<_i2.Response>);
-  @override
-  _i5.Future<_i2.Response> get(
+  _i6.Future<_i2.Response> get(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -511,7 +492,7 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i5.Future<_i2.Response>.value(_FakeResponse_3(
+        returnValue: _i6.Future<_i2.Response>.value(_FakeResponse_3(
           this,
           Invocation.method(
             #get,
@@ -519,13 +500,57 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             {#headers: headers},
           ),
         )),
-      ) as _i5.Future<_i2.Response>);
+      ) as _i6.Future<_i2.Response>);
   @override
-  _i5.Future<_i2.Response> post(
+  _i6.Future<_i4.IOStreamedResponse> send(_i2.BaseRequest? request) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #send,
+          [request],
+        ),
+        returnValue:
+            _i6.Future<_i4.IOStreamedResponse>.value(_FakeIOStreamedResponse_4(
+          this,
+          Invocation.method(
+            #send,
+            [request],
+          ),
+        )),
+      ) as _i6.Future<_i4.IOStreamedResponse>);
+  @override
+  void close() => super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i6.Future<_i2.Response> head(
+    Uri? url, {
+    Map<String, String>? headers,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #head,
+          [url],
+          {#headers: headers},
+        ),
+        returnValue: _i6.Future<_i2.Response>.value(_FakeResponse_3(
+          this,
+          Invocation.method(
+            #head,
+            [url],
+            {#headers: headers},
+          ),
+        )),
+      ) as _i6.Future<_i2.Response>);
+  @override
+  _i6.Future<_i2.Response> post(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i8.Encoding? encoding,
+    _i9.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -537,7 +562,7 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             #encoding: encoding,
           },
         ),
-        returnValue: _i5.Future<_i2.Response>.value(_FakeResponse_3(
+        returnValue: _i6.Future<_i2.Response>.value(_FakeResponse_3(
           this,
           Invocation.method(
             #post,
@@ -549,13 +574,13 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             },
           ),
         )),
-      ) as _i5.Future<_i2.Response>);
+      ) as _i6.Future<_i2.Response>);
   @override
-  _i5.Future<_i2.Response> put(
+  _i6.Future<_i2.Response> put(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i8.Encoding? encoding,
+    _i9.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -567,7 +592,7 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             #encoding: encoding,
           },
         ),
-        returnValue: _i5.Future<_i2.Response>.value(_FakeResponse_3(
+        returnValue: _i6.Future<_i2.Response>.value(_FakeResponse_3(
           this,
           Invocation.method(
             #put,
@@ -579,13 +604,13 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             },
           ),
         )),
-      ) as _i5.Future<_i2.Response>);
+      ) as _i6.Future<_i2.Response>);
   @override
-  _i5.Future<_i2.Response> patch(
+  _i6.Future<_i2.Response> patch(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i8.Encoding? encoding,
+    _i9.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -597,7 +622,7 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             #encoding: encoding,
           },
         ),
-        returnValue: _i5.Future<_i2.Response>.value(_FakeResponse_3(
+        returnValue: _i6.Future<_i2.Response>.value(_FakeResponse_3(
           this,
           Invocation.method(
             #patch,
@@ -609,13 +634,13 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             },
           ),
         )),
-      ) as _i5.Future<_i2.Response>);
+      ) as _i6.Future<_i2.Response>);
   @override
-  _i5.Future<_i2.Response> delete(
+  _i6.Future<_i2.Response> delete(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i8.Encoding? encoding,
+    _i9.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -627,7 +652,7 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             #encoding: encoding,
           },
         ),
-        returnValue: _i5.Future<_i2.Response>.value(_FakeResponse_3(
+        returnValue: _i6.Future<_i2.Response>.value(_FakeResponse_3(
           this,
           Invocation.method(
             #delete,
@@ -639,9 +664,9 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
             },
           ),
         )),
-      ) as _i5.Future<_i2.Response>);
+      ) as _i6.Future<_i2.Response>);
   @override
-  _i5.Future<String> read(
+  _i6.Future<String> read(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -651,10 +676,10 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i5.Future<String>.value(''),
-      ) as _i5.Future<String>);
+        returnValue: _i6.Future<String>.value(''),
+      ) as _i6.Future<String>);
   @override
-  _i5.Future<_i9.Uint8List> readBytes(
+  _i6.Future<_i10.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -664,30 +689,6 @@ class MockHttpClient extends _i1.Mock implements _i2.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i5.Future<_i9.Uint8List>.value(_i9.Uint8List(0)),
-      ) as _i5.Future<_i9.Uint8List>);
-  @override
-  _i5.Future<_i2.StreamedResponse> send(_i2.BaseRequest? request) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #send,
-          [request],
-        ),
-        returnValue:
-            _i5.Future<_i2.StreamedResponse>.value(_FakeStreamedResponse_4(
-          this,
-          Invocation.method(
-            #send,
-            [request],
-          ),
-        )),
-      ) as _i5.Future<_i2.StreamedResponse>);
-  @override
-  void close() => super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i6.Future<_i10.Uint8List>.value(_i10.Uint8List(0)),
+      ) as _i6.Future<_i10.Uint8List>);
 }

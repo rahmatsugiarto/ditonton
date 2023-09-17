@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:core/core.dart';
-import 'package:shared_dependencies/http/http.dart' as http;
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();
@@ -12,7 +12,7 @@ abstract class MovieRemoteDataSource {
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-  final http.Client client;
+  final SSLPinningClient client;
 
   MovieRemoteDataSourceImpl({required this.client});
 
@@ -20,6 +20,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies() async {
     final response =
         await client.get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY'));
+    log('$BASE_URL/movie/now_playing?$API_KEY');
 
     if (response.statusCode == 200) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;

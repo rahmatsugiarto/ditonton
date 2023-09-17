@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie/movie.dart';
 import 'package:search/search.dart';
-import 'package:shared_dependencies/http/http.dart' as http;
 import 'package:tv/tv.dart';
 import 'package:watchlist/watchlist.dart';
 
@@ -154,5 +153,5 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton<SSLPinningClient>(() => SSLPinningClient());
 }

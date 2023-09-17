@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:core/core.dart';
-import 'package:shared_dependencies/http/http.dart' as http;
 
 abstract class SearchRemoteDataSource {
   Future<List<MovieModel>> searchMovies(String query);
@@ -9,7 +8,7 @@ abstract class SearchRemoteDataSource {
 }
 
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
-  final http.Client client;
+  final SSLPinningClient client;
 
   SearchRemoteDataSourceImpl({required this.client});
 

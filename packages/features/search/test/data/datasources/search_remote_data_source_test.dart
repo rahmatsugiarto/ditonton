@@ -10,15 +10,12 @@ import 'package:shared_dependencies/http/http.dart' as http;
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
-  const BASE_URL = 'https://api.themoviedb.org/3';
-
   late SearchRemoteDataSourceImpl dataSource;
-  late MockHttpClient mockHttpClient;
+  late MockSSLPinningClient mockSSLPinningClient;
 
   setUp(() {
-    mockHttpClient = MockHttpClient();
-    dataSource = SearchRemoteDataSourceImpl(client: mockHttpClient);
+    mockSSLPinningClient = MockSSLPinningClient();
+    dataSource = SearchRemoteDataSourceImpl(client: mockSSLPinningClient);
   });
 
   group('search movies', () {
@@ -29,7 +26,7 @@ void main() {
 
     test('should return list of movies when response code is 200', () async {
       // arrange
-      when(mockHttpClient
+      when(mockSSLPinningClient
               .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$tQuery')))
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/search_spiderman_movie.json'), 200));
@@ -42,7 +39,7 @@ void main() {
     test('should throw ServerException when response code is other than 200',
         () async {
       // arrange
-      when(mockHttpClient
+      when(mockSSLPinningClient
               .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$tQuery')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
@@ -60,7 +57,7 @@ void main() {
 
     test('should return list of tv series when response code is 200', () async {
       // arrange
-      when(mockHttpClient
+      when(mockSSLPinningClient
               .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery')))
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/search_spiderman_tv_series.json'), 200));
@@ -73,7 +70,7 @@ void main() {
     test('should throw ServerException when response code is other than 200',
         () async {
       // arrange
-      when(mockHttpClient
+      when(mockSSLPinningClient
               .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
