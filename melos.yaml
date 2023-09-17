@@ -25,10 +25,10 @@ scripts:
     description: Run all Dart & Flutter tests in this project.
 
   # Generate Resources
-  generate:resources:
-    run: melos exec -c 1 --depends-on="build_runner" --depends-on="flutter_gen_runner" -- "fluttergen -c pubspec.yaml"
-    packageFilters:
-      dependsOn: flutter_gen_runner
+  # generate:resources:
+  #   run: melos exec -c 1 --depends-on="build_runner" --depends-on="flutter_gen_runner" -- "fluttergen -c pubspec.yaml"
+  #   packageFilters:
+  #     dependsOn: flutter_gen_runner
 
   generate:flutter:
     run: melos exec -c 1 --depends-on="build_runner" --flutter -- "flutter pub run build_runner build --delete-conflicting-outputs && exit 0"
