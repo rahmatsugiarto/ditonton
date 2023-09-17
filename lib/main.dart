@@ -1,5 +1,7 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/movie.dart';
@@ -8,14 +10,26 @@ import 'package:shared_dependencies/provider/provider.dart';
 import 'package:tv/tv.dart';
 import 'package:watchlist/watchlist.dart';
 
+import 'firebase_options.dart';
 import 'injection.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   di.init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(
+    analytics: analytics,
+    routeFilter: (_) => true,
+  );
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -63,7 +77,10 @@ class MyApp extends StatelessWidget {
           textTheme: kTextTheme,
         ),
         home: HomeMoviePage(),
-        navigatorObservers: [routeObserver],
+        navigatorObservers: <NavigatorObserver>[
+          observer,
+          routeObserver,
+        ],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case MOVIE_HOME_ROUTE_NAME:
@@ -108,13 +125,15 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
             default:
-              return MaterialPageRoute(builder: (_) {
-                return Scaffold(
-                  body: Center(
-                    child: Text('Page not found :('),
-                  ),
-                );
-              });
+              return MaterialPageRoute(
+                builder: (_) {
+                  return Scaffold(
+                    body: Center(
+                      child: Text('Page not found :('),
+                    ),
+                  );
+                },
+              );
           }
         },
       ),
