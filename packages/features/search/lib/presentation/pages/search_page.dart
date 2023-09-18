@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_dependencies/bloc/bloc.dart';
 
-import '../bloc/search_bloc.dart';
+import '../bloc/search_bloc/search_bloc.dart';
 
 class SearchPage extends StatefulWidget {
   @override

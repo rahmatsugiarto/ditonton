@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
 import 'package:shared_dependencies/shared_dependencies.dart';
 
-import '../../domain/usecases/search_movies.dart';
-import '../../domain/usecases/search_tv_series.dart';
+import '../../../search.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';
