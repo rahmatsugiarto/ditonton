@@ -9,3 +9,4 @@ export 'http/http.dart';
 export 'provider/provider.dart';
 export 'rxdart/rxdart.dart';
 export 'sqflite/sqflite.dart';
+export 'bloc/bloc.dart';

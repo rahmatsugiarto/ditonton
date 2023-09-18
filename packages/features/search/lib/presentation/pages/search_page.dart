@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_dependencies/bloc/bloc.dart';
 
-import '../provider/search_notifier.dart';
+import '../bloc/search_bloc.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -18,6 +18,19 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
+  void _search(String query) {
+    if (context.read<SearchBloc>().state.filter == ChipsFilter.Movie) {
+      context.read<SearchBloc>().add(OnQueryChangedMovie(query));
+    } else {
+      context.read<SearchBloc>().add(OnQueryChangedTv(query));
+    }
+  }
+
+  void _setFilter(ChipsFilter filter) {
+    context.read<SearchBloc>().add(FilterSearch(filter));
+    controllerSearch.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,37 +42,26 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Consumer<SearchNotifier>(builder: (context, data, child) {
-              return TextField(
-                controller: controllerSearch,
-                onSubmitted: (query) {
-                  if (data.filter == ChipsFilter.Movie) {
-                    data.fetchMovieSearch(query);
-                  } else {
-                    data.fetchTvSeriesSearch(query);
-                  }
-                },
-                decoration: InputDecoration(
-                  hintText: 'Search title',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(),
-                ),
-                textInputAction: TextInputAction.search,
-              );
-            }),
+            TextField(
+              controller: controllerSearch,
+              onChanged: _search,
+              decoration: InputDecoration(
+                hintText: 'Search title',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+              textInputAction: TextInputAction.search,
+            ),
             SizedBox(height: 16),
-            Consumer<SearchNotifier>(
-              builder: (context, data, child) {
+            BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
                 return Row(
                   children: [
                     FilterChip(
                       label: Text("Movie"),
                       selectedColor: kPrussianBlue,
-                      selected: data.filter == ChipsFilter.Movie,
-                      onSelected: (_) {
-                        data.setFilter(ChipsFilter.Movie);
-                        controllerSearch.clear();
-                      },
+                      selected: state.filter == ChipsFilter.Movie,
+                      onSelected: (_) => _setFilter(ChipsFilter.Movie),
                     ),
                     const SizedBox(
                       width: 4.0,
@@ -67,11 +69,8 @@ class _SearchPageState extends State<SearchPage> {
                     FilterChip(
                       label: Text("Tv Series"),
                       selectedColor: kPrussianBlue,
-                      selected: data.filter == ChipsFilter.TvSeries,
-                      onSelected: (_) {
-                        data.setFilter(ChipsFilter.TvSeries);
-                        controllerSearch.clear();
-                      },
+                      selected: state.filter == ChipsFilter.TvSeries,
+                      onSelected: (_) => _setFilter(ChipsFilter.TvSeries),
                     ),
                   ],
                 );
@@ -81,35 +80,35 @@ class _SearchPageState extends State<SearchPage> {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<SearchNotifier>(
-              builder: (context, data, child) {
-                if (data.searchState == RequestState.Loading) {
+            BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state.searchState == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.searchState == RequestState.Loaded) {
+                } else if (state.searchState == RequestState.Loaded) {
                   return Builder(builder: (context) {
-                    final result = data.searchMovieResult;
+                    final result = state.searchMovieResult;
 
-                    if (data.filter == ChipsFilter.Movie) {
+                    if (state.filter == ChipsFilter.Movie) {
                       return Expanded(
                         child: ListView.builder(
                           padding: const EdgeInsets.all(8),
                           itemBuilder: (context, index) {
-                            final movie = data.searchMovieResult[index];
+                            final movie = state.searchMovieResult[index];
                             return MovieCard(movie);
                           },
                           itemCount: result.length,
                         ),
                       );
                     } else {
-                      final result = data.searchTvResult;
+                      final result = state.searchTvResult;
 
                       return Expanded(
                         child: ListView.builder(
                           padding: const EdgeInsets.all(8),
                           itemBuilder: (context, index) {
-                            final tvSeries = data.searchTvResult[index];
+                            final tvSeries = state.searchTvResult[index];
                             return TvSeriesCard(tvSeries);
                           },
                           itemCount: result.length,

@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/movie.dart';
 import 'package:search/search.dart';
+import 'package:shared_dependencies/bloc/bloc.dart';
 import 'package:shared_dependencies/provider/provider.dart';
 import 'package:tv/tv.dart';
 import 'package:watchlist/watchlist.dart';
@@ -40,8 +41,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieDetailNotifier>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<SearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<SearchBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedMoviesNotifier>(),

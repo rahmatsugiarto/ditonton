@@ -25,12 +25,7 @@ void init() {
       removeWatchlist: locator(),
     ),
   );
-  locator.registerFactory(
-    () => SearchNotifier(
-      searchMovies: locator(),
-      searchTvSeries: locator(),
-    ),
-  );
+
   locator.registerFactory(
     () => PopularMoviesNotifier(
       locator(),
@@ -77,6 +72,13 @@ void init() {
   locator.registerFactory(
     () => EpisodeTvSeriesNotifier(
       getTvSeriesSeasonDetail: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => SearchBloc(
+      searchMovies: locator(),
+      searchTvSeries: locator(),
     ),
   );
 
