@@ -15,10 +15,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     required this.searchTvSeries,
   }) : super(
           SearchState(
-            searchState: RequestState.Empty,
-            searchMovieResult: [],
-            searchTvResult: [],
-            message: "",
+            searchMovieState: ViewData.initial(),
+            searchTvState: ViewData.initial(),
             filter: ChipsFilter.Movie,
           ),
         ) {
@@ -26,20 +24,18 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       (event, emit) async {
         final query = event.query;
 
-        emit(state.copyWith(signInState: RequestState.Loading));
+        emit(state.copyWith(searchMovieState: ViewData.loading()));
         final result = await searchMovies.execute(query);
 
         result.fold(
           (failure) {
             emit(state.copyWith(
-              message: failure.message,
-              signInState: RequestState.Error,
+              searchMovieState: ViewData.error(message: failure.message),
             ));
           },
           (data) {
             emit(state.copyWith(
-              searchMovieResult: data,
-              signInState: RequestState.Loaded,
+              searchMovieState: ViewData.loaded(data: data),
             ));
           },
         );
@@ -50,20 +46,18 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<OnQueryChangedTv>(
       (event, emit) async {
         final query = event.query;
-        emit(state.copyWith(signInState: RequestState.Loading));
+        emit(state.copyWith(searchTvState: ViewData.loading()));
         final result = await searchTvSeries.execute(query);
 
         result.fold(
           (failure) {
             emit(state.copyWith(
-              message: failure.message,
-              signInState: RequestState.Error,
+              searchTvState: ViewData.error(message: failure.message),
             ));
           },
           (data) {
             emit(state.copyWith(
-              searchTvResult: data,
-              signInState: RequestState.Loaded,
+              searchTvState: ViewData.loaded(data: data),
             ));
           },
         );

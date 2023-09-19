@@ -80,49 +80,95 @@ class _SearchPageState extends State<SearchPage> {
               'Search Result',
               style: kHeading6,
             ),
-            BlocBuilder<SearchBloc, SearchState>(
-              builder: (context, state) {
-                if (state.searchState == RequestState.Loading) {
+            BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
+              if (state.filter == ChipsFilter.Movie) {
+                final statusSearchMovie = state.searchMovieState.status;
+                if (statusSearchMovie.isLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state.searchState == RequestState.Loaded) {
-                  return Builder(builder: (context) {
-                    final result = state.searchMovieResult;
-
-                    if (state.filter == ChipsFilter.Movie) {
-                      return Expanded(
-                        child: ListView.builder(
-                          padding: const EdgeInsets.all(8),
-                          itemBuilder: (context, index) {
-                            final movie = state.searchMovieResult[index];
-                            return MovieCard(movie);
-                          },
-                          itemCount: result.length,
-                        ),
-                      );
-                    } else {
-                      final result = state.searchTvResult;
-
-                      return Expanded(
-                        child: ListView.builder(
-                          padding: const EdgeInsets.all(8),
-                          itemBuilder: (context, index) {
-                            final tvSeries = state.searchTvResult[index];
-                            return TvSeriesCard(tvSeries);
-                          },
-                          itemCount: result.length,
-                        ),
-                      );
-                    }
-                  });
-                } else {
+                } else if (statusSearchMovie.isHasData) {
+                  final dataSearchMovie =
+                      state.searchMovieState.data ?? <Movie>[];
                   return Expanded(
-                    child: Container(),
+                    child: ListView.builder(
+                      itemCount: dataSearchMovie.length,
+                      padding: const EdgeInsets.all(8),
+                      itemBuilder: (context, index) {
+                        final movie = dataSearchMovie[index];
+                        return MovieCard(movie);
+                      },
+                    ),
                   );
+                } else {
+                  return SizedBox.shrink();
                 }
-              },
-            ),
+              } else {
+                final statusSearchTv = state.searchTvState.status;
+                if (statusSearchTv.isLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (statusSearchTv.isHasData) {
+                  final dataSearchTv = state.searchTvState.data ?? <TvSeries>[];
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: dataSearchTv.length,
+                      padding: const EdgeInsets.all(8),
+                      itemBuilder: (context, index) {
+                        final tv = dataSearchTv[index];
+                        return TvSeriesCard(tv);
+                      },
+                    ),
+                  );
+                } else {
+                  return SizedBox.shrink();
+                }
+              }
+            }),
+            // BlocBuilder<SearchBloc, SearchState>(
+            //   builder: (context, state) {
+            //     if (state.searchState == RequestState.Loading) {
+            //       return Center(
+            //         child: CircularProgressIndicator(),
+            //       );
+            //     } else if (state.searchState == RequestState.Loaded) {
+            //       return Builder(builder: (context) {
+            //         final result = state.searchMovieState;
+
+            //         if (state.filter == ChipsFilter.Movie) {
+            //           return Expanded(
+            //             child: ListView.builder(
+            //               padding: const EdgeInsets.all(8),
+            //               itemBuilder: (context, index) {
+            //                 final movie = state.searchMovieState[index];
+            //                 return MovieCard(movie);
+            //               },
+            //               itemCount: result.length,
+            //             ),
+            //           );
+            //         } else {
+            //           final result = state.searchTvState;
+
+            //           return Expanded(
+            //             child: ListView.builder(
+            //               padding: const EdgeInsets.all(8),
+            //               itemBuilder: (context, index) {
+            //                 final tvSeries = state.searchTvState[index];
+            //                 return TvSeriesCard(tvSeries);
+            //               },
+            //               itemCount: result.length,
+            //             ),
+            //           );
+            //         }
+            //       });
+            //     } else {
+            //       return Expanded(
+            //         child: Container(),
+            //       );
+            //     }
+            //   },
+            // ),
           ],
         ),
       ),

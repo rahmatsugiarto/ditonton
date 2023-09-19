@@ -23,10 +23,8 @@ void main() {
       searchTvSeries: mockSearchTvSeries,
     );
     searchState = SearchState(
-      searchState: RequestState.Empty,
-      searchMovieResult: [],
-      searchTvResult: [],
-      message: "",
+      searchMovieState: ViewData.initial(),
+      searchTvState: ViewData.initial(),
       filter: ChipsFilter.Movie,
     );
   });
@@ -91,10 +89,9 @@ void main() {
       act: (bloc) => bloc.add(OnQueryChangedMovie(tQuery)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        searchState.copyWith(signInState: RequestState.Loading),
+        searchState.copyWith(searchMovieState: ViewData.loading()),
         searchState.copyWith(
-          searchMovieResult: tMovieList,
-          signInState: RequestState.Loaded,
+          searchMovieState: ViewData.loaded(data: tMovieList),
         )
       ],
       verify: (bloc) {
@@ -112,10 +109,9 @@ void main() {
       act: (bloc) => bloc.add(OnQueryChangedMovie(tQuery)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        searchState.copyWith(signInState: RequestState.Loading),
+        searchState.copyWith(searchMovieState: ViewData.loading()),
         searchState.copyWith(
-          message: "Server Failure",
-          signInState: RequestState.Error,
+          searchMovieState: ViewData.error(message: "Server Failure"),
         )
       ],
       verify: (bloc) {
@@ -134,10 +130,9 @@ void main() {
       act: (bloc) => bloc.add(OnQueryChangedTv(tQuery)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        searchState.copyWith(signInState: RequestState.Loading),
+        searchState.copyWith(searchTvState: ViewData.loading()),
         searchState.copyWith(
-          searchTvResult: tTvSeriesList,
-          signInState: RequestState.Loaded,
+          searchTvState: ViewData.loaded(data: tTvSeriesList),
         )
       ],
       verify: (bloc) {
@@ -155,10 +150,9 @@ void main() {
       act: (bloc) => bloc.add(OnQueryChangedTv(tQuery)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        searchState.copyWith(signInState: RequestState.Loading),
+        searchState.copyWith(searchTvState: ViewData.loading()),
         searchState.copyWith(
-          message: "Server Failure",
-          signInState: RequestState.Error,
+          searchTvState: ViewData.error(message: "Server Failure"),
         )
       ],
       verify: (bloc) {

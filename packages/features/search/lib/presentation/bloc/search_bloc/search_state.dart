@@ -1,42 +1,32 @@
 part of 'search_bloc.dart';
 
 class SearchState extends Equatable {
-  final RequestState searchState;
-  final List<Movie> searchMovieResult;
-  final List<TvSeries> searchTvResult;
-  final String message;
+  final ViewData<List<Movie>> searchMovieState;
+  final ViewData<List<TvSeries>> searchTvState;
   final ChipsFilter filter;
 
   const SearchState({
-    required this.searchState,
-    required this.searchMovieResult,
-    required this.searchTvResult,
-    required this.message,
+    required this.searchMovieState,
+    required this.searchTvState,
     required this.filter,
   });
 
   SearchState copyWith({
-    RequestState? signInState,
-    List<Movie>? searchMovieResult,
-    List<TvSeries>? searchTvResult,
-    String? message,
+    ViewData<List<Movie>>? searchMovieState,
+    ViewData<List<TvSeries>>? searchTvState,
     ChipsFilter? filter,
   }) {
     return SearchState(
-      searchState: signInState ?? this.searchState,
-      searchMovieResult: searchMovieResult ?? this.searchMovieResult,
-      searchTvResult: searchTvResult ?? this.searchTvResult,
-      message: message ?? this.message,
+      searchMovieState: searchMovieState ?? this.searchMovieState,
+      searchTvState: searchTvState ?? this.searchTvState,
       filter: filter ?? this.filter,
     );
   }
 
   @override
   List<Object?> get props => [
-        searchState,
-        searchMovieResult,
-        searchTvResult,
-        message,
+        searchMovieState,
+        searchTvState,
         filter,
       ];
 }
