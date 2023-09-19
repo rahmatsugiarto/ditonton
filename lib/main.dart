@@ -35,20 +35,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MovieListBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMoviesBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PopularMoviesBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistNotifier>(),
@@ -93,7 +90,10 @@ class MyApp extends StatelessWidget {
             case MOVIE_DETAIL_ROUTE:
               final id = settings.arguments as int;
               return MaterialPageRoute(
-                builder: (_) => MovieDetailPage(id: id),
+                builder: (_) => BlocProvider(
+                  create: (context) => di.locator<MovieDetailBloc>(),
+                  child: MovieDetailPage(id: id),
+                ),
                 settings: settings,
               );
             case SEARCH_ROUTE:
