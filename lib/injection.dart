@@ -43,24 +43,24 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TvSeriesListNotifier(
+    () => TvSeriesListBloc(
       getNowPlayingTvSeries: locator(),
       getPopularTvSeries: locator(),
       getTopRatedTvSeries: locator(),
     ),
   );
   locator.registerFactory(
-    () => PopularTvSeriesNotifier(
+    () => PopularTvSeriesBloc(
       getPopularTvSeries: locator(),
     ),
   );
   locator.registerFactory(
-    () => TopRatedTvSeriesNotifier(
+    () => TopRatedTvSeriesBloc(
       getTopRatedTvSeries: locator(),
     ),
   );
   locator.registerFactory(
-    () => TvSeriesDetailNotifier(
+    () => TvSeriesDetailBloc(
       getTvSeriesRecommendations: locator(),
       getTvSeriesDetail: locator(),
       getWatchListStatus: locator(),
@@ -70,7 +70,7 @@ void init() {
   );
 
   locator.registerFactory(
-    () => EpisodeTvSeriesNotifier(
+    () => EpisodeTvSeriesBloc(
       getTvSeriesSeasonDetail: locator(),
     ),
   );

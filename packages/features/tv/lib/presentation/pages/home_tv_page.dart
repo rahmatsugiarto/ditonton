@@ -1,9 +1,10 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_dependencies/bloc/bloc.dart';
 import 'package:shared_dependencies/cached_network_image/cached_network_image.dart';
-import 'package:shared_dependencies/provider/provider.dart';
+import 'package:tv/tv.dart';
 
-import '../provider/tv_series_list_notifier.dart';
+import '../bloc/tv_series_list_bloc/tv_series_list_event.dart';
 
 class HomeTvSeriesPage extends StatefulWidget {
   @override
@@ -14,11 +15,12 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<TvSeriesListNotifier>(context, listen: false)
-          ..fetchNowPlayingTvSeries()
-          ..fetchPopularTvSeries()
-          ..fetchTopRatedTvSeries());
+    Future.microtask(() {
+      context.read<TvSeriesListBloc>()
+        ..add(FetchNowPlayingTvSeries())
+        ..add(FetchPopularTvSeries())
+        ..add(FetchTopRatedTvSeries());
+    });
   }
 
   @override
@@ -90,14 +92,17 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                 'Now Playing',
                 style: kHeading6,
               ),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<TvSeriesListBloc, TvSeriesListState>(
+                  builder: (context, state) {
+                final status = state.nowPlayingTvState.status;
+                if (status.isLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return TvSeriesList(data.nowPlayingTvSeries);
+                } else if (status.isHasData) {
+                  return TvSeriesList(
+                    state.nowPlayingTvState.data ?? <TvSeries>[],
+                  );
                 } else {
                   return Text('Failed');
                 }
@@ -109,14 +114,17 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                   TV_POPULAR_ROUTE,
                 ),
               ),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.popularTvSeriesState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<TvSeriesListBloc, TvSeriesListState>(
+                  builder: (context, state) {
+                final status = state.popularTvState.status;
+                if (status.isLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return TvSeriesList(data.popularTvSeries);
+                } else if (status.isHasData) {
+                  return TvSeriesList(
+                    state.popularTvState.data ?? <TvSeries>[],
+                  );
                 } else {
                   return Text('Failed');
                 }
@@ -128,14 +136,17 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                   TV_TOP_RATED_ROUTE,
                 ),
               ),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedTvSeriesState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<TvSeriesListBloc, TvSeriesListState>(
+                  builder: (context, state) {
+                final status = state.topRatedTvState.status;
+                if (status.isLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return TvSeriesList(data.topRatedTvSeries);
+                } else if (status.isHasData) {
+                  return TvSeriesList(
+                    state.topRatedTvState.data ?? <TvSeries>[],
+                  );
                 } else {
                   return Text('Failed');
                 }

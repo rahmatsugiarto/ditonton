@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_dependencies/bloc/bloc.dart';
 import 'package:shared_dependencies/cached_network_image/cached_network_image.dart';
-import 'package:shared_dependencies/provider/provider.dart';
 
-import '../provider/episode_tv_series_notifiier.dart';
+import '../bloc/episode_tv_series_bloc/episode_tv_series_bloc.dart';
+import '../bloc/episode_tv_series_bloc/episode_tv_series_event.dart';
 
 class EpisodeTvPage extends StatefulWidget {
   final int id;
@@ -25,13 +24,11 @@ class _EpisodeTvPageState extends State<EpisodeTvPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<EpisodeTvSeriesNotifier>(context, listen: false)
-          .fetchTvSeriesSeasonDetail(
-        widget.id,
-        widget.seasonNumber,
-      );
+      context.read<EpisodeTvSeriesBloc>().add(FetchEpisodeTvSeries(
+            id: widget.id,
+            season: widget.seasonNumber,
+          ));
     });
-    log(widget.id.toString());
   }
 
   @override
@@ -40,19 +37,20 @@ class _EpisodeTvPageState extends State<EpisodeTvPage> {
       appBar: AppBar(
         title: Text("Episode"),
       ),
-      body: Consumer<EpisodeTvSeriesNotifier>(
-        builder: (context, provider, child) {
-          if (provider.tvSeriesSeasonState == RequestState.Loading) {
+      body: BlocBuilder<EpisodeTvSeriesBloc, EpisodeTvSeriesState>(
+        builder: (context, state) {
+          final status = state.episodeTvSeriesState.status;
+          if (status.isLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (provider.tvSeriesSeasonState == RequestState.Loaded) {
-            final tvSeriesSeasonDetail = provider.tvSeriesSeason;
+          } else if (status.isHasData) {
+            final listEpisode = state.episodeTvSeriesState.data ?? <Episode>[];
             return ListView.builder(
                 shrinkWrap: true,
-                itemCount: tvSeriesSeasonDetail.episodes.length,
+                itemCount: listEpisode.length,
                 itemBuilder: (context, i) {
-                  var episode = tvSeriesSeasonDetail.episodes[i];
+                  var episode = listEpisode[i];
                   return GestureDetector(
                     onTap: () {},
                     child: Container(
@@ -123,7 +121,7 @@ class _EpisodeTvPageState extends State<EpisodeTvPage> {
                   );
                 });
           } else {
-            return Text(provider.message);
+            return Text(state.episodeTvSeriesState.message);
           }
         },
       ),
