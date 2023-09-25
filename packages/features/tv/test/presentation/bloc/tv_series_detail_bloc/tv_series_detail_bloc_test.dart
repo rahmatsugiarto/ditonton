@@ -248,28 +248,28 @@ void main() {
         verify(mockGetWatchListStatusTvSeries.execute(tId));
       },
     );
-    // test("should emit isAddedToWatchlist is true when tvSeries already saved",
-    //     () async {
-    //   // arrange
-    //   when(mockGetWatchListStatusTvSeries.execute(tId))
-    //       .thenAnswer((_) async => true);
-    //   // act
-    //   final result = await tvSeriesDetailBloc.getWatchListStatus.execute(tId);
-    //   // assert
-    //   expect(result, true);
-    // });
+    test("should emit isAddedToWatchlist is true when tvSeries already saved",
+        () async {
+      // arrange
+      when(mockGetWatchListStatusTvSeries.execute(tId))
+          .thenAnswer((_) async => true);
+      // act
+      final result = await tvSeriesDetailBloc.getWatchListStatus.execute(tId);
+      // assert
+      expect(result, true);
+    });
 
-    // test(
-    //     "should emit isAddedToWatchlist false when the tvSeries has not been saved",
-    //     () async {
-    //   // arrange
-    //   when(mockGetWatchListStatusTvSeries.execute(tId))
-    //       .thenAnswer((_) async => false);
-    //   // act
-    //   final result = await tvSeriesDetailBloc.getWatchListStatus.execute(tId);
-    //   // assert
-    //   expect(result, false);
-    // });
+    test(
+        "should emit isAddedToWatchlist false when the tvSeries has not been saved",
+        () async {
+      // arrange
+      when(mockGetWatchListStatusTvSeries.execute(tId))
+          .thenAnswer((_) async => false);
+      // act
+      final result = await tvSeriesDetailBloc.getWatchListStatus.execute(tId);
+      // assert
+      expect(result, false);
+    });
   });
 
   group("event RemoveFromWatchlist", () {

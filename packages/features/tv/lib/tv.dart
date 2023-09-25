@@ -23,8 +23,3 @@ export 'presentation/pages/home_tv_page.dart';
 export 'presentation/pages/popular_tv_series_page.dart';
 export 'presentation/pages/top_rated_tv_series_page.dart';
 export 'presentation/pages/tv_series_detail_page.dart';
-export 'presentation/provider/episode_tv_series_notifiier.dart';
-export 'presentation/provider/popular_tv_series_notifier.dart';
-export 'presentation/provider/top_rated_tv_series_notifier.dart';
-export 'presentation/provider/tv_series_detail_notifier.dart';
-export 'presentation/provider/tv_series_list_notifier.dart';

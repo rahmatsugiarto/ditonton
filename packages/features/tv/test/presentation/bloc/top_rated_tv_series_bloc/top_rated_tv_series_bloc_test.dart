@@ -7,7 +7,7 @@ import 'package:shared_dependencies/dartz/dartz.dart';
 import 'package:tv/presentation/bloc/top_rated_tv_series_bloc/top_rated_tv_series_event.dart';
 import 'package:tv/tv.dart';
 
-import '../../provider/top_rated_tv_series_notifier_test.mocks.dart';
+import 'top_rated_tv_series_bloc_test.mocks.dart';
 
 @GenerateMocks([GetTopRatedTvSeries])
 void main() {
