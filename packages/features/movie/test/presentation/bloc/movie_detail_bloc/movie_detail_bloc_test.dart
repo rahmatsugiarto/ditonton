@@ -39,7 +39,7 @@ void main() {
       removeWatchlist: mockRemoveWatchlistMovies,
     );
     movieDetailState = MovieDetailState(
-      movieState: ViewData.initial(),
+      movieDetailState: ViewData.initial(),
       movieRecommendationsState: ViewData.initial(),
       isAddedToWatchlist: false,
       watchlistMessage: "",
@@ -86,9 +86,9 @@ void main() {
       act: (bloc) => bloc.add(FetchMovieDetail(id: tId)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        movieDetailState.copyWith(movieState: ViewData.loading()),
+        movieDetailState.copyWith(movieDetailState: ViewData.loading()),
         movieDetailState.copyWith(
-          movieState: ViewData.loaded(data: testMovieDetail),
+          movieDetailState: ViewData.loaded(data: testMovieDetail),
         )
       ],
       verify: (bloc) {
@@ -106,9 +106,9 @@ void main() {
       act: (bloc) => bloc.add(FetchMovieDetail(id: tId)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        movieDetailState.copyWith(movieState: ViewData.loading()),
+        movieDetailState.copyWith(movieDetailState: ViewData.loading()),
         movieDetailState.copyWith(
-          movieState: ViewData.error(message: "Server Failure"),
+          movieDetailState: ViewData.error(message: "Server Failure"),
         )
       ],
       verify: (bloc) {

@@ -23,23 +23,23 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
     required this.saveWatchlist,
     required this.removeWatchlist,
   }) : super(MovieDetailState(
-          movieState: ViewData.initial(),
+          movieDetailState: ViewData.initial(),
           movieRecommendationsState: ViewData.initial(),
           isAddedToWatchlist: false,
           watchlistMessage: "",
           isErrorWatchlist: false,
         )) {
     on<FetchMovieDetail>((event, emit) async {
-      emit(state.copyWith(movieState: ViewData.loading()));
+      emit(state.copyWith(movieDetailState: ViewData.loading()));
       final result = await getMovieDetail.execute(event.id);
 
       result.fold((failure) {
         emit(state.copyWith(
-          movieState: ViewData.error(message: failure.message),
+          movieDetailState: ViewData.error(message: failure.message),
         ));
       }, (data) {
         emit(state.copyWith(
-          movieState: ViewData.loaded(data: data),
+          movieDetailState: ViewData.loaded(data: data),
         ));
       });
     });

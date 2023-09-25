@@ -1,14 +1,14 @@
 part of 'movie_detail_bloc.dart';
 
 class MovieDetailState extends Equatable {
-  final ViewData<MovieDetail> movieState;
+  final ViewData<MovieDetail> movieDetailState;
   final ViewData<List<Movie>> movieRecommendationsState;
   final bool isAddedToWatchlist;
   final String watchlistMessage;
   final bool isErrorWatchlist;
 
   const MovieDetailState({
-    required this.movieState,
+    required this.movieDetailState,
     required this.movieRecommendationsState,
     required this.isAddedToWatchlist,
     required this.watchlistMessage,
@@ -16,15 +16,14 @@ class MovieDetailState extends Equatable {
   });
 
   MovieDetailState copyWith({
-    MovieDetail? movie,
-    ViewData<MovieDetail>? movieState,
+    ViewData<MovieDetail>? movieDetailState,
     ViewData<List<Movie>>? movieRecommendationsState,
     bool? isAddedToWatchlist,
     String? watchlistMessage,
     bool? isErrorWatchlist,
   }) {
     return MovieDetailState(
-      movieState: movieState ?? this.movieState,
+      movieDetailState: movieDetailState ?? this.movieDetailState,
       movieRecommendationsState:
           movieRecommendationsState ?? this.movieRecommendationsState,
       isAddedToWatchlist: isAddedToWatchlist ?? this.isAddedToWatchlist,
@@ -35,7 +34,7 @@ class MovieDetailState extends Equatable {
 
   @override
   List<Object?> get props => [
-        movieState,
+        movieDetailState,
         movieRecommendationsState,
         isAddedToWatchlist,
         watchlistMessage,

@@ -24,7 +24,7 @@ void main() {
 
     mockMovieDetailBloc = MockMovieDetailBloc();
     movieDetailState = MovieDetailState(
-      movieState: ViewData.initial(),
+      movieDetailState: ViewData.initial(),
       movieRecommendationsState: ViewData.initial(),
       isAddedToWatchlist: false,
       watchlistMessage: "",
@@ -46,7 +46,7 @@ void main() {
       (WidgetTester tester) async {
     when(() => mockMovieDetailBloc.state).thenReturn(
       movieDetailState.copyWith(
-        movieState: ViewData.loaded(data: testMovieDetail),
+        movieDetailState: ViewData.loaded(data: testMovieDetail),
         movieRecommendationsState: ViewData.loaded(),
       ),
     );
@@ -59,11 +59,11 @@ void main() {
   });
 
   testWidgets(
-      'Watchlist button should dispay check icon when movie is added to wathclist',
+      'Watchlist button should display check icon when movie is added to wathclist',
       (WidgetTester tester) async {
     when(() => mockMovieDetailBloc.state).thenReturn(
       movieDetailState.copyWith(
-        movieState: ViewData.loaded(data: testMovieDetail),
+        movieDetailState: ViewData.loaded(data: testMovieDetail),
         movieRecommendationsState: ViewData.loaded(),
         isAddedToWatchlist: true,
       ),

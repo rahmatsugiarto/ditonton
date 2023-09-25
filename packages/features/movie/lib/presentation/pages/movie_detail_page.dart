@@ -26,14 +26,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     });
   }
 
-  void fetchMovieDetail(int id) {
-    context.read<MovieDetailBloc>()..add(FetchMovieDetail(id: widget.id));
-  }
-
-  void loadWatchlistStatus(int id) {
-    context.read<MovieDetailBloc>()..add(LoadWatchlistStatus(id: widget.id));
-  }
-
   void addWatchlist(MovieDetail movie) {
     context.read<MovieDetailBloc>().add(AddWatchlist(movie: movie));
   }
@@ -69,16 +61,15 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               },
             );
           }
-          
         },
         builder: (context, state) {
-          final status = state.movieState.status;
+          final status = state.movieDetailState.status;
           if (status.isLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
           } else if (status.isHasData) {
-            final movie = state.movieState.data ?? MovieDetail();
+            final movie = state.movieDetailState.data ?? MovieDetail();
             return SafeArea(
               child: DetailContent(
                 movie: movie,
@@ -93,7 +84,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               ),
             );
           } else {
-            return Text(state.movieState.message);
+            return Text(state.movieDetailState.message);
           }
         },
       ),
