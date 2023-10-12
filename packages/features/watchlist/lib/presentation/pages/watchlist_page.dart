@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_dependencies/provider/provider.dart';
-
-import '../provider/watchlist_notifier.dart';
+import 'package:shared_dependencies/bloc/bloc.dart';
+import 'package:watchlist/presentation/bloc/watchlist_bloc/watchlist_bloc.dart';
 
 class WatchlistPage extends StatefulWidget {
   @override
@@ -16,12 +15,10 @@ class _WatchlistPageState extends State<WatchlistPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    Future.microtask(() =>
-        Provider.of<WatchlistNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
-    Future.microtask(() =>
-        Provider.of<WatchlistNotifier>(context, listen: false)
-            .fetchWatchlistTv());
+    Future.microtask(() {
+      fetchWatchlistMovies();
+      fetchWatchlistTv();
+    });
   }
 
   @override
@@ -38,8 +35,15 @@ class _WatchlistPageState extends State<WatchlistPage>
   }
 
   void didPopNext() {
-    Provider.of<WatchlistNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
+    fetchWatchlistMovies();
+  }
+
+  void fetchWatchlistMovies() {
+    context.read<WatchlistBloc>().add(FetchWatchlistMovies());
+  }
+
+  void fetchWatchlistTv() {
+    context.read<WatchlistBloc>().add(FetchWatchlistTv());
   }
 
   @override
@@ -66,24 +70,26 @@ class _WatchlistPageState extends State<WatchlistPage>
           //Watchlist Movie
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Consumer<WatchlistNotifier>(
-              builder: (context, data, child) {
-                if (data.watchlistMovieState == RequestState.Loading) {
+            child: BlocBuilder<WatchlistBloc, WatchlistState>(
+              builder: (context, state) {
+                final status = state.watchlistMovieState.status;
+                if (status.isLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.watchlistMovieState == RequestState.Loaded) {
+                } else if (status.isHasData) {
+                  final data = state.watchlistMovieState.data ?? <Movie>[];
                   return ListView.builder(
                     itemBuilder: (context, index) {
-                      final movie = data.watchlistMovies[index];
+                      final movie = data[index];
                       return MovieCard(movie);
                     },
-                    itemCount: data.watchlistMovies.length,
+                    itemCount: data.length,
                   );
                 } else {
                   return Center(
                     key: Key('error_message'),
-                    child: Text(data.message),
+                    child: Text(state.watchlistMovieState.message),
                   );
                 }
               },
@@ -92,24 +98,26 @@ class _WatchlistPageState extends State<WatchlistPage>
           //Watchlist TV
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Consumer<WatchlistNotifier>(
-              builder: (context, data, child) {
-                if (data.watchlistTvState == RequestState.Loading) {
+            child: BlocBuilder<WatchlistBloc, WatchlistState>(
+              builder: (context, state) {
+                final status = state.watchlistTvState.status;
+                if (status.isLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.watchlistTvState == RequestState.Loaded) {
+                } else if (status.isHasData) {
+                  final data = state.watchlistTvState.data ?? <TvSeries>[];
                   return ListView.builder(
                     itemBuilder: (context, index) {
-                      final watchlistTv = data.watchlistTv[index];
+                      final watchlistTv = data[index];
                       return TvSeriesCard(watchlistTv);
                     },
-                    itemCount: data.watchlistTv.length,
+                    itemCount: data.length,
                   );
                 } else {
                   return Center(
                     key: Key('error_message'),
-                    child: Text(data.message),
+                    child: Text(state.watchlistTvState.message),
                   );
                 }
               },
