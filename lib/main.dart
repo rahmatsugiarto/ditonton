@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:movie/movie.dart';
 import 'package:search/search.dart';
 import 'package:shared_dependencies/bloc/bloc.dart';
-import 'package:shared_dependencies/provider/provider.dart';
 import 'package:tv/tv.dart';
 import 'package:watchlist/watchlist.dart';
 
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (_) => di.locator<MovieListBloc>(),
@@ -47,8 +46,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<PopularMoviesBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<TvSeriesListBloc>(),

@@ -37,7 +37,7 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => WatchlistNotifier(
+    () => WatchlistBloc(
       getWatchlistMovies: locator(),
       getWatchlistTvSeries: locator(),
     ),
