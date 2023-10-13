@@ -30,7 +30,7 @@ void main() {
       18,
       80,
     ],
-    id: 1396,
+    id: 1,
     name: "Breaking Bad",
     originCountry: [
       "US",
@@ -52,7 +52,7 @@ void main() {
       18,
       80,
     ],
-    id: 1396,
+    id: 1,
     name: "Breaking Bad",
     originCountry: [
       "US",
@@ -216,7 +216,7 @@ void main() {
         ),
       ],
       homepage: "https://www.amazon.com/dp/B08WJP55PR",
-      id: 95557,
+      id: 1,
       inProduction: true,
       languages: ["en"],
       lastAirDate: "2021-04-29",
