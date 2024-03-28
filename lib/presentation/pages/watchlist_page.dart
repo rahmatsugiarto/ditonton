@@ -46,6 +46,8 @@ class _WatchlistPageState extends State<WatchlistPage>
   void didPopNext() {
     Provider.of<WatchlistNotifier>(context, listen: false)
         .fetchWatchlistMovies();
+
+    Provider.of<WatchlistNotifier>(context, listen: false).fetchWatchlistTv();
   }
 
   @override
