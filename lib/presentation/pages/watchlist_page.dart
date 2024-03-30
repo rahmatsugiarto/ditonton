@@ -80,6 +80,12 @@ class _WatchlistPageState extends State<WatchlistPage>
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                } else if (data.watchlistMovieState == RequestState.Empty) {
+                  return Center(
+                    child: Text(
+                      "No Watchlist Movie",
+                    ),
+                  );
                 } else if (data.watchlistMovieState == RequestState.Loaded) {
                   return ListView.builder(
                     itemBuilder: (context, index) {
@@ -105,6 +111,12 @@ class _WatchlistPageState extends State<WatchlistPage>
                 if (data.watchlistTvState == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
+                  );
+                } else if (data.watchlistTvState == RequestState.Empty) {
+                  return Center(
+                    child: Text(
+                      "No Watchlist TV",
+                    ),
                   );
                 } else if (data.watchlistTvState == RequestState.Loaded) {
                   return ListView.builder(

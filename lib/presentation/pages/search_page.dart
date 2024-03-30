@@ -92,6 +92,23 @@ class _SearchPageState extends State<SearchPage> {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                } else if (data.searchMovieState == RequestState.Empty) {
+                  return Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height / 3,
+                          ),
+                          Center(
+                            child: Text(
+                              "Not Found",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
                 } else if (data.searchMovieState == RequestState.Loaded) {
                   return Builder(builder: (context) {
                     final result = data.searchMovieResult;

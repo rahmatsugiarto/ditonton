@@ -42,8 +42,12 @@ class WatchlistNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (moviesData) {
-        _watchlistMovieState = RequestState.Loaded;
-        _watchlistMovies = moviesData;
+        if (moviesData.isEmpty) {
+          _watchlistMovieState = RequestState.Empty;
+        } else {
+          _watchlistMovieState = RequestState.Loaded;
+          _watchlistMovies = moviesData;
+        }
         notifyListeners();
       },
     );
@@ -61,8 +65,12 @@ class WatchlistNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (tvSeriesData) {
-        _watchlistTvState = RequestState.Loaded;
-        _watchlistTv = tvSeriesData;
+        if (tvSeriesData.isEmpty) {
+          _watchlistTvState = RequestState.Empty;
+        } else {
+          _watchlistTvState = RequestState.Loaded;
+          _watchlistTv = tvSeriesData;
+        }
         notifyListeners();
       },
     );

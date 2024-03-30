@@ -15,7 +15,7 @@ class SearchNotifier extends ChangeNotifier {
     required this.searchTvSeries,
   });
 
-  RequestState _searchMovieState = RequestState.Empty;
+  RequestState _searchMovieState = RequestState.Initial;
   RequestState get searchMovieState => _searchMovieState;
 
   List<Movie> _searchMovieResult = [];
@@ -42,8 +42,12 @@ class SearchNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (data) {
-        _searchMovieResult = data;
-        _searchMovieState = RequestState.Loaded;
+        if (data.isEmpty) {
+          _searchMovieState = RequestState.Empty;
+        } else {
+          _searchMovieResult = data;
+          _searchMovieState = RequestState.Loaded;
+        }
         notifyListeners();
       },
     );
@@ -61,8 +65,13 @@ class SearchNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (data) {
-        _searchTvResult = data;
-        _searchMovieState = RequestState.Loaded;
+        if (data.isEmpty) {
+          _searchMovieState = RequestState.Empty;
+        } else {
+          _searchTvResult = data;
+          _searchMovieState = RequestState.Loaded;
+        }
+
         notifyListeners();
       },
     );
