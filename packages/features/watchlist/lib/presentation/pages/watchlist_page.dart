@@ -36,6 +36,7 @@ class _WatchlistPageState extends State<WatchlistPage>
 
   void didPopNext() {
     fetchWatchlistMovies();
+    fetchWatchlistTv();
   }
 
   void fetchWatchlistMovies() {
@@ -77,6 +78,10 @@ class _WatchlistPageState extends State<WatchlistPage>
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                } else if (status.isNoData) {
+                  return Center(
+                    child: Text(state.watchlistMovieState.message),
+                  );
                 } else if (status.isHasData) {
                   final data = state.watchlistMovieState.data ?? <Movie>[];
                   return ListView.builder(
@@ -104,6 +109,10 @@ class _WatchlistPageState extends State<WatchlistPage>
                 if (status.isLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
+                  );
+                } else if (status.isNoData) {
+                  return Center(
+                    child: Text(state.watchlistTvState.message),
                   );
                 } else if (status.isHasData) {
                   final data = state.watchlistTvState.data ?? <TvSeries>[];

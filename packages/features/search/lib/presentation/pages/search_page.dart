@@ -87,6 +87,23 @@ class _SearchPageState extends State<SearchPage> {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                } else if (statusSearchMovie.isNoData) {
+                  return Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height / 3,
+                          ),
+                          Center(
+                            child: Text(
+                              state.searchMovieState.message,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
                 } else if (statusSearchMovie.isHasData) {
                   final dataSearchMovie =
                       state.searchMovieState.data ?? <Movie>[];
@@ -109,6 +126,23 @@ class _SearchPageState extends State<SearchPage> {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                } else if (statusSearchTv.isNoData) {
+                  return Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height / 3,
+                          ),
+                          Center(
+                            child: Text(
+                              state.searchTvState.message,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
                 } else if (statusSearchTv.isHasData) {
                   final dataSearchTv = state.searchTvState.data ?? <TvSeries>[];
                   return Expanded(
@@ -126,49 +160,6 @@ class _SearchPageState extends State<SearchPage> {
                 }
               }
             }),
-            // BlocBuilder<SearchBloc, SearchState>(
-            //   builder: (context, state) {
-            //     if (state.searchState == RequestState.Loading) {
-            //       return Center(
-            //         child: CircularProgressIndicator(),
-            //       );
-            //     } else if (state.searchState == RequestState.Loaded) {
-            //       return Builder(builder: (context) {
-            //         final result = state.searchMovieState;
-
-            //         if (state.filter == ChipsFilter.Movie) {
-            //           return Expanded(
-            //             child: ListView.builder(
-            //               padding: const EdgeInsets.all(8),
-            //               itemBuilder: (context, index) {
-            //                 final movie = state.searchMovieState[index];
-            //                 return MovieCard(movie);
-            //               },
-            //               itemCount: result.length,
-            //             ),
-            //           );
-            //         } else {
-            //           final result = state.searchTvState;
-
-            //           return Expanded(
-            //             child: ListView.builder(
-            //               padding: const EdgeInsets.all(8),
-            //               itemBuilder: (context, index) {
-            //                 final tvSeries = state.searchTvState[index];
-            //                 return TvSeriesCard(tvSeries);
-            //               },
-            //               itemCount: result.length,
-            //             ),
-            //           );
-            //         }
-            //       });
-            //     } else {
-            //       return Expanded(
-            //         child: Container(),
-            //       );
-            //     }
-            //   },
-            // ),
           ],
         ),
       ),

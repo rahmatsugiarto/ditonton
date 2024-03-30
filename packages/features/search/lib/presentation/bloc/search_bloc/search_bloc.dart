@@ -34,9 +34,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             ));
           },
           (data) {
-            emit(state.copyWith(
-              searchMovieState: ViewData.loaded(data: data),
-            ));
+            if (data.isEmpty) {
+              emit(state.copyWith(
+                searchMovieState: ViewData.noData(message: "Not Found"),
+              ));
+            } else {
+              emit(state.copyWith(
+                searchMovieState: ViewData.loaded(data: data),
+              ));
+            }
           },
         );
       },
@@ -56,9 +62,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             ));
           },
           (data) {
-            emit(state.copyWith(
-              searchTvState: ViewData.loaded(data: data),
-            ));
+            if (data.isEmpty) {
+              emit(state.copyWith(
+                searchTvState: ViewData.noData(message: "Not Found"),
+              ));
+            } else {
+              emit(state.copyWith(
+                searchTvState: ViewData.loaded(data: data),
+              ));
+            }
           },
         );
       },

@@ -59,9 +59,6 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<TopRatedTvSeriesBloc>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<TvSeriesDetailBloc>(),
-        ),
-        BlocProvider(
           create: (_) => di.locator<EpisodeTvSeriesBloc>(),
         ),
       ],
@@ -110,7 +107,10 @@ class MyApp extends StatelessWidget {
             case TV_DETAIL_ROUTE:
               final id = settings.arguments as int;
               return MaterialPageRoute(
-                builder: (_) => TvSeriesDetailPage(id: id),
+                builder: (_) => BlocProvider(
+                  create: (_) => di.locator<TvSeriesDetailBloc>(),
+                  child: TvSeriesDetailPage(id: id),
+                ),
                 settings: settings,
               );
             case TV_EPISODE_ROUTE:

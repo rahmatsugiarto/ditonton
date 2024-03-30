@@ -29,9 +29,16 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
           watchlistMovieState: ViewData.error(message: failure.message),
         ));
       }, (data) {
-        emit(state.copyWith(
-          watchlistMovieState: ViewData.loaded(data: data),
-        ));
+        if (data.isEmpty) {
+          emit(state.copyWith(
+              watchlistMovieState: ViewData.noData(
+            message: "No Watchlist Movie",
+          )));
+        } else {
+          emit(state.copyWith(
+            watchlistMovieState: ViewData.loaded(data: data),
+          ));
+        }
       });
     });
 
@@ -44,9 +51,16 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
           watchlistTvState: ViewData.error(message: failure.message),
         ));
       }, (data) {
-        emit(state.copyWith(
-          watchlistTvState: ViewData.loaded(data: data),
-        ));
+        if (data.isEmpty) {
+          emit(state.copyWith(
+              watchlistTvState: ViewData.noData(
+            message: "No Watchlist TV",
+          )));
+        } else {
+          emit(state.copyWith(
+            watchlistTvState: ViewData.loaded(data: data),
+          ));
+        }
       });
     });
   }
