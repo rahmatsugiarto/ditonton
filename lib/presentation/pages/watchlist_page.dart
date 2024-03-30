@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../common/constants.dart';
 import '../../common/enum.dart';
 import '../../common/utils.dart';
-import '../provider/watchlist_movie_notifier.dart';
+import '../provider/watchlist_notifier.dart';
 import '../widgets/movie_card_list.dart';
 import '../widgets/tv_series_card_list.dart';
 
@@ -23,10 +23,10 @@ class _WatchlistPageState extends State<WatchlistPage>
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
+        Provider.of<WatchlistNotifier>(context, listen: false)
             .fetchWatchlistMovies());
     Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
+        Provider.of<WatchlistNotifier>(context, listen: false)
             .fetchWatchlistTv());
   }
 
@@ -44,8 +44,10 @@ class _WatchlistPageState extends State<WatchlistPage>
   }
 
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
+    Provider.of<WatchlistNotifier>(context, listen: false)
         .fetchWatchlistMovies();
+
+    Provider.of<WatchlistNotifier>(context, listen: false).fetchWatchlistTv();
   }
 
   @override
@@ -72,11 +74,17 @@ class _WatchlistPageState extends State<WatchlistPage>
           //Watchlist Movie
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Consumer<WatchlistMovieNotifier>(
+            child: Consumer<WatchlistNotifier>(
               builder: (context, data, child) {
                 if (data.watchlistMovieState == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
+                  );
+                } else if (data.watchlistMovieState == RequestState.Empty) {
+                  return Center(
+                    child: Text(
+                      "No Watchlist Movie",
+                    ),
                   );
                 } else if (data.watchlistMovieState == RequestState.Loaded) {
                   return ListView.builder(
@@ -98,11 +106,17 @@ class _WatchlistPageState extends State<WatchlistPage>
           //Watchlist TV
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Consumer<WatchlistMovieNotifier>(
+            child: Consumer<WatchlistNotifier>(
               builder: (context, data, child) {
                 if (data.watchlistTvState == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
+                  );
+                } else if (data.watchlistTvState == RequestState.Empty) {
+                  return Center(
+                    child: Text(
+                      "No Watchlist TV",
+                    ),
                   );
                 } else if (data.watchlistTvState == RequestState.Loaded) {
                   return ListView.builder(

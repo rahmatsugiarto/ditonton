@@ -6,16 +6,16 @@ import '../../domain/entities/movie.dart';
 import '../../domain/usecases/search_movies.dart';
 import '../../domain/usecases/search_tv_series.dart';
 
-class MovieSearchNotifier extends ChangeNotifier {
+class SearchNotifier extends ChangeNotifier {
   final SearchMovies searchMovies;
   final SearchTvSeries searchTvSeries;
 
-  MovieSearchNotifier({
+  SearchNotifier({
     required this.searchMovies,
     required this.searchTvSeries,
   });
 
-  RequestState _searchMovieState = RequestState.Empty;
+  RequestState _searchMovieState = RequestState.Initial;
   RequestState get searchMovieState => _searchMovieState;
 
   List<Movie> _searchMovieResult = [];
@@ -42,8 +42,12 @@ class MovieSearchNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (data) {
-        _searchMovieResult = data;
-        _searchMovieState = RequestState.Loaded;
+        if (data.isEmpty) {
+          _searchMovieState = RequestState.Empty;
+        } else {
+          _searchMovieResult = data;
+          _searchMovieState = RequestState.Loaded;
+        }
         notifyListeners();
       },
     );
@@ -61,8 +65,13 @@ class MovieSearchNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (data) {
-        _searchTvResult = data;
-        _searchMovieState = RequestState.Loaded;
+        if (data.isEmpty) {
+          _searchMovieState = RequestState.Empty;
+        } else {
+          _searchTvResult = data;
+          _searchMovieState = RequestState.Loaded;
+        }
+
         notifyListeners();
       },
     );
