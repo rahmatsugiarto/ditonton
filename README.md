@@ -1,3 +1,4 @@
+[![Codemagic build status](https://api.codemagic.io/apps/660c2341f1d272085ead9080/release-workflow/status_badge.svg)](https://codemagic.io/apps/660c2341f1d272085ead9080/release-workflow/latest_build)
 
 # Ditonton - Submission 2 Dicoding
 
