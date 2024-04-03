@@ -7,6 +7,7 @@ workflows:
     environment:
       # Using the latest Flutter version.
       flutter: stable
+      xcode: latest
     # This workflow should trigger when a new pull request opens or updates.
     triggering:
       events:
@@ -24,8 +25,8 @@ workflows:
       - name: Run Tests
         script: melos run test:all
 
-      - name: Build Android APK
-        script: flutter build apk --release
+      - name: Build Android
+        script: flutter build appbundle --release
 
-      - name: Build IOS IPA
-        script: flutter build ipa --release
+      - name: Build IOS
+        script: flutter build ios --release --no-codesign
