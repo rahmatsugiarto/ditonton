@@ -1,4 +1,6 @@
-[![Codemagic build status](https://api.codemagic.io/apps/660c2341f1d272085ead9080/release-workflow/status_badge.svg)](https://codemagic.io/apps/660c2341f1d272085ead9080/release-workflow/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/660c2341f1d272085ead9080/CI/status_badge.svg)](https://codemagic.io/apps/660c2341f1d272085ead9080/CI/latest_build)
+[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
+
 
 # Ditonton - Submission 2 Dicoding
 
