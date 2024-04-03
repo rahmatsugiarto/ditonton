@@ -10,6 +10,7 @@ This project is not made from scratch, a [starter](https://github.com/dicodingac
 ## How to Run
 
 this project use [Flutter 3.16.9](https://flutter.dev/)
+this project use [Flutter 3.16.9](https://flutter.dev/)
 
 clone this project and run this command in the project path.
 

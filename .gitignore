@@ -577,7 +577,6 @@ DerivedData/
 
 ### -------------------- VisualStudioCode.gitignore  ------------------- ###
 
-.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
