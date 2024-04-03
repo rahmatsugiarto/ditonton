@@ -1,0 +1,25 @@
+{
+    "_id": "63cafc22ea3949007ca1f2ee",
+    "air_date": "2023-11-02",
+    "episodes": [
+        {
+            "air_date": "2023-11-02",
+            "episode_number": 1,
+            "id": 4590786,
+            "name": "Episode 1",
+            "overview": "",
+            "production_code": "",
+            "season_number": 2,
+            "show_id": 95557,
+            "still_path": "stillPath",
+            "vote_average": 0.0,
+            "vote_count": 0
+        }
+    ],
+    "name": "Season 2",
+    "overview": "",
+    "id": 325266,
+    "poster_path": "/lxVS24ZhG3WQf3IMbkFIg6olT6A.jpg",
+    "season_number": 2,
+    "vote_average": 0.0
+}

@@ -22,7 +22,6 @@
 .classpath
 .project
 .settings/
-.vscode/
 
 # Flutter repo-specific
 /bin/cache/
@@ -578,7 +577,6 @@ DerivedData/
 
 ### -------------------- VisualStudioCode.gitignore  ------------------- ###
 
-.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
