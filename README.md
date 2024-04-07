@@ -14,13 +14,16 @@ This project is not made from scratch, a [starter](https://github.com/dicodingac
 ## How to Run
 
 this project use [Flutter 3.16.9](https://flutter.dev/)
-this project use [Flutter 3.16.9](https://flutter.dev/)
 
-clone this project and run this command in the project path.
-
+1. Clone this project
+2. Add Melos and run
 ```bash
-flutter pub get
-flutter pub run build_runner build --delete-conflicting-outputs
+dart pub global activate melos
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+melos bootstrap
+```
+3. Run
+```bash
 flutter run
 ```
 
@@ -31,6 +34,10 @@ flutter run
 - Unit Test
 - Widget Test
 - State Management Bloc
+- CI with CodeMagic
+- SSL Pinning
+- Integration with Firebase Analytics & Crashlytics
+- Modularization
 
 ## Packages
 
